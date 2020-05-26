@@ -11,12 +11,12 @@ new Vue({
   data: {
     message: "Hola Mundo!",
     bitCointData: {},
-    time: moment().format('h:mm:ss a'),
-    fechaMoment: moment().format('MMMM Do YYYY'),
-    symbol: null,
+    time: moment().format("h:mm:ss a"),
+    fechaMoment: moment().format("MMMM Do YYYY"),
+    symbol: null
   },
   mounted() {
-    console.log('created');
+    console.log("created");
     console.log(this.fechaMoment);
     axios
       .get("https://api.coindesk.com/v1/bpi/currentprice.json")
@@ -27,9 +27,9 @@ new Vue({
       .catch(function(error) {
         // handle error
         console.log(error);
-    })
+      })
       .then(function() {
         // always executed
-    });
+      });
   }
 }).$mount("#app");
