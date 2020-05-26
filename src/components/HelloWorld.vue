@@ -1,122 +1,80 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
-          target="_blank"
-          rel="noopener"
-          >router</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
-        >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
-        >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li>
-        <a href="https://router.vuejs.org" target="_blank" rel="noopener"
-          >vue-router</a
-        >
-      </li>
-      <li>
-        <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-devtools#vue-devtools"
-          target="_blank"
-          rel="noopener"
-          >vue-devtools</a
-        >
-      </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener"
-          >vue-loader</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener"
-          >awesome-vue</a
-        >
-      </li>
-    </ul>
+  <div>
+    <div class="row mt-4">
+      <div class="col">
+        <table class="table table-striped">
+          <tr>
+            <td>MONEDA</td>
+            <td>PRECIO</td>
+          </tr>
+                    <tr v-for="item in this.bitCointData" v-bind:key="item">
+                        <td>{{ item.code }} </td>
+                        <td>{{ item.rate }} 
+                        <span v-if="item.code == 'USD'">
+                        $
+                        </span>
+                        <span v-else-if="item.code == 'GBP'">
+                        £
+                        </span>
+                        <span v-else-if="item.code == 'EUR'">
+                        €
+                        </span>
+                    </td>
+                    </tr>
+                </table>
+            </div>
+    </div>
+    <section class="mt-4">
+            <h5>
+                <p>
+                    CoinDesk proporciona una API simple para que sus datos del Índice de precios de Bitcoin (BPI) estén disponibles programáticamente para otros. 
+                    Puede utilizar esta API para incluir nuestros datos en cualquier aplicación o sitio web como mejor le parezca, siempre que cada página o aplicación que la use incluya el texto "Powered by CoinDesk ", que se vincula a nuestra página de precios . Los datos de CoinDesk están disponibles a través de una serie de recursos HTTP, 
+                    y los datos se devuelven en formato JSON. Por favor no abuse de nuestro servicio.
+                </p> 
+                <code>&lt;https://api.coindesk.com/v1/bpi/currentprice.json&gt;</code>.    
+            </h5>
+            <div class="row text-center">
+                <div class="col col-md-2">
+                    <h5 style="margin-top: 60%;">
+                        <strong><em>Documentación:</em></strong>
+                    </h5>
+                </div>
+                <div class="col col-md-10">
+                    <ul class="list-group mt-4 col-md-10">                        
+                        <li class="list-group-item"><a href="https://vuejs.org/" target="_blanck" class="btn btn-primary btn-block">Vue.js</a></li>
+                        <li class="list-group-item"><a href="https://github.com/axios/axios" target="_blanck" class="btn btn-secondary btn-block">Axios</a></li>
+                        <li class="list-group-item"><a href="https://momentjs.com/" target="_blanck" class="btn btn-secondary btn-success btn-block">Moments.js</a></li>
+                        <li class="list-group-item"><a href="https://www.coindesk.com/coindesk-api" target="_blanck" class="btn btn-info btn-block">Coindesk</a></li>   
+                      </ul>
+                </div>
+            </div>
+    </section>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
+    bitCointData: {},
+    symbol: null,
+  },
+  created(){
+    console.log('created');
+    console.log(this.fechaMoment);
+    axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        .then((response) => {
+            this.bitCointData = response.data.bpi;
+            console.log(this.bitCointData );
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

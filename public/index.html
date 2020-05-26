@@ -1,17 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div class="container">
+      <div id="app">
+        <div class="row mt-4">
+          <div class="col">
+              <table class="table table-striped">
+                  <tr>
+                      <td>MONEDA</td>
+                      <td>PRECIO</td>
+                  </tr>
+                  <tr v-for="item in this.bitCointData">
+                      <td>{{ item.code }} </td>
+                      <td>{{ item.rate }} 
+                      <span v-if="item.code == 'USD'">
+                      $
+                      </span>
+                      <span v-else-if="item.code == 'GBP'">
+                      £
+                      </span>
+                      <span v-else-if="item.code == 'EUR'">
+                      €
+                      </span>
+                  </td>
+                  </tr>
+              </table>
+          </div>
+      </div>
+      </div>
+    </div>
     <!-- built files will be auto injected -->
+    <!-- Footer -->
+    <footer class="page-footer font-small blue mt-4 bg-dark text-white" style="height: 100px;">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3 text-white">
+         <h5 style=" margin-top: 25px">
+          © 2020 Créditos: <a href="https://www.linkedin.com/in/jos%C3%A9-gregorio-l%C3%B3pez-arias/" target="_blanck" class="text-white">lopezajoseg@gmail.com</a>
+         </h5>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
   </body>
 </html>
