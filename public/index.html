@@ -14,30 +14,7 @@
     </noscript>
     <div class="container">
       <div id="app">
-        <div class="row mt-4">
-          <div class="col">
-              <table class="table table-striped">
-                  <tr>
-                      <td>MONEDA</td>
-                      <td>PRECIO</td>
-                  </tr>
-                  <tr v-for="item in this.bitCointData">
-                      <td>{{ item.code }} </td>
-                      <td>{{ item.rate }} 
-                      <span v-if="item.code == 'USD'">
-                      $
-                      </span>
-                      <span v-else-if="item.code == 'GBP'">
-                      £
-                      </span>
-                      <span v-else-if="item.code == 'EUR'">
-                      €
-                      </span>
-                  </td>
-                  </tr>
-              </table>
-          </div>
-      </div>
+        
       </div>
     </div>
     <!-- built files will be auto injected -->
